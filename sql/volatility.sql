@@ -1,0 +1,30 @@
+SELECT 
+    customer_id,
+    fraud_label,
+    province,
+    city,
+    marital_status,
+    occupation_code,
+    income,
+    txn_per_active_day,
+    amount_per_active_day,
+    volatility_ratio,
+    max_avg_ratio,
+    spike_ratio,
+    high_value_ratio,
+    channel_diversity_ratio,
+    country_diversity_ratio,
+    cash_ratio,
+    wire_ratio,
+    flow_imbalance_ratio,
+    credit_debit_ratio,
+    total_income_ratio,
+    max_income_ratio,
+    account_age_days,
+    txn_per_account_day,
+    amount_per_account_day,
+    customer_age,
+    (volatility_ratio - AVG(volatility_ratio) OVER (PARTITION BY occupation_code)) / 
+    NULLIF(STDEV(volatility_ratio) OVER (PARTITION BY occupation_code), 0) AS volatility_zscore
+FROM mart.customer_aml_metrics
+ORDER BY volatility_zscore DESC

@@ -1,0 +1,8 @@
+CREATE SCHEMA raw;
+GO
+
+CREATE SCHEMA core;
+GO
+
+CREATE SCHEMA mart;
+GO
